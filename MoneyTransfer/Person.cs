@@ -23,14 +23,14 @@ namespace MoneyTransfer
         public void DisplayInfo()
         {
             //TODO 4: Use string interpolation in a ConsoleWriteLine to display the user's name and also the amount of money in their wallet (using dot notation). One line.
-            wallet = new Wallet("100.0");
-            Console.WriteLine($"Player Name:{Person.name}, Wallet Cash: {Person.Wallet.cash}");
+            
+            Console.WriteLine($"Player Name:{name}, Wallet Cash: {wallet.money}");
         }
 
         public void AcceptMoney(int amount)
         {
             //TODO 7: Use an assignment operator to increase the amount of money in the person's wallet by the value of the 'amount' parameter. One line.
-            Wallet.cash += amount;
+            wallet.money += amount;
         }
 
         public bool TransferMoney(Person receiver, int amountToTransfer)
@@ -38,16 +38,17 @@ namespace MoneyTransfer
             //TODO 8: Use a conditional to check if the 'amountToTransfer' parameter of this method is less than or equal to the amount of money in the wallet of the giver.
             //If the parameter is less than the amount in the wallet, subtract that amount from the wallet, then call the receiver's AcceptMoney() method and pass 'amountToTransfer' into it. Also use a Console.WriteLine to describe the transaction that occurred.
             //If the parameter is greater than the amount in the giver's wallet, do not transfer any money and instead print a message describing why the transfer failed.
-            if (amountToTransfer <= Wallet.Cash)
+            if (amountToTransfer <= wallet.money)
             {
-                Wallet.cash -= amountToTransfer;
+                wallet.money -= amountToTransfer;
                 receiver.AcceptMoney(amountToTransfer);
-                Console.WriteLine($"{Name}transferred {amountToTransfer} to {receiver.Name}.);
+                Console.WriteLine($"{name}transferred {amountToTransfer} to {receiver.name}");
              }
             else 
             {          
-                Console.WriteLine($"{Name} does not have enough money to transfer {amountToTransfer} to {receiver.Name}.");
+                Console.WriteLine($"{name} does not have enough money to transfer {amountToTransfer} to {receiver.name}.");
             }
+            return false;
             
         }
 
